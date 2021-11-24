@@ -69,14 +69,176 @@ resource "aws_route_table" "our-route-table" {
   }
 }
 
+resource "aws_network_acl" "private" {
+  vpc_id = aws_vpc.our-network.id
+
+  ingress {
+    from_port = 22
+    to_port   = 22
+    rule_no   = 1
+    action    = "allow"
+
+    protocol   = "tcp"
+    cidr_block = var.CIDR_to_allow_inbound_SSH
+  }
+
+  ingress {
+    from_port = 0
+    to_port   = 0
+    rule_no   = 200
+    action    = "deny"
+
+    protocol   = "all"
+    cidr_block = "0.0.0.0/0"
+  }
+
+  ingress {
+    from_port        = 0
+    to_port          = 0
+    rule_no    = 200
+        action     = "deny"
+
+    protocol         = "all"
+    cidr_block      = "0.0.0.0/0"
+  }
+
+  egress {
+    from_port = 0
+    to_port   = 0
+    rule_no   = 100
+    action    = "allow"
+
+    protocol   = "-1"
+    cidr_block = "0.0.0.0/0"
+  }
+
+  subnet_ids = [aws_subnet.our-subnet.id, aws_subnet.our-subnet2.id]
+
+  tags = {
+    # To change
+    service = "acl"
+    Name    = "learn-acl1"
+
+    # Defined in terraform.tfvars
+    owner       = var.author
+    platform    = var.platform
+    environment = var.environment
+  }
+}
+
+resource "aws_network_acl" "public" {
+  vpc_id = aws_vpc.our-network.id
+
+  ingress {
+    from_port = 22
+    rule_no   = 1
+    action    = "allow"
+
+    to_port    = 22
+    protocol   = "tcp"
+    cidr_block = var.CIDR_to_allow_inbound_SSH
+  }
+
+  ingress {
+    from_port = 80
+    to_port   = 80
+    rule_no   = 100
+    action    = "allow"
+
+    protocol   = "tcp"
+    cidr_block = "0.0.0.0/0"
+  }
+
+  ingress {
+    from_port = 0
+    to_port   = 0
+    rule_no   = 300
+    action    = "deny"
+
+    protocol   = "all"
+    cidr_block = "0.0.0.0/0"
+  }
+
+  egress {
+    from_port = 0
+    to_port   = 0
+    rule_no   = 100
+    action    = "allow"
+
+    protocol   = "-1"
+    cidr_block = "0.0.0.0/0"
+  }
+
+  subnet_ids = [aws_subnet.our-subnet3.id, aws_subnet.our-subnet4.id]
+
+  tags = {
+    # To change
+    service = "acl"
+    Name    = "learn-acl2"
+
+    # Defined in terraform.tfvars
+    owner       = var.author
+    platform    = var.platform
+    environment = var.environment
+  }
+}
+
 resource "aws_subnet" "our-subnet" {
   vpc_id     = aws_vpc.our-network.id
-  cidr_block = "10.0.0.0/16"
+  cidr_block = var.CIDR1
 
   tags = {
     # To change
     service = "subnet"
     Name    = "learn-subnet"
+
+    # Defined in terraform.tfvars
+    owner       = var.author
+    platform    = var.platform
+    environment = var.environment
+  }
+}
+
+resource "aws_subnet" "our-subnet2" {
+  vpc_id     = aws_vpc.our-network.id
+  cidr_block = var.CIDR2
+
+  tags = {
+    # To change
+    service = "subnet"
+    Name    = "learn-subnet2"
+
+    # Defined in terraform.tfvars
+    owner       = var.author
+    platform    = var.platform
+    environment = var.environment
+  }
+}
+
+resource "aws_subnet" "our-subnet3" {
+  vpc_id     = aws_vpc.our-network.id
+  cidr_block = var.CIDR3
+
+  tags = {
+    # To change
+    service = "subnet"
+    Name    = "learn-subnet3"
+
+    # Defined in terraform.tfvars
+    owner       = var.author
+    platform    = var.platform
+    environment = var.environment
+  }
+}
+
+resource "aws_subnet" "our-subnet4" {
+  vpc_id     = aws_vpc.our-network.id
+  cidr_block = var.CIDR4
+
+  tags = {
+    # To change
+    service = "subnet"
+    Name    = "learn-subnet4"
 
     # Defined in terraform.tfvars
     owner       = var.author
