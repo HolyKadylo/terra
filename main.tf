@@ -92,6 +92,17 @@ resource "aws_network_acl" "private" {
     cidr_block = "0.0.0.0/0"
   }
 
+
+  ingress {
+    from_port        = 0
+    to_port          = 0
+    rule_no    = 200
+        action     = "deny"
+
+    protocol         = "all"
+    cidr_block      = "0.0.0.0/0"
+  }
+
   egress {
     from_port = 0
     to_port   = 0
