@@ -58,3 +58,27 @@ variable "environment" {
   type        = string
   default     = "env"
 }
+
+variable "CIDR1" {
+  description = "CIDR for private network"
+  type        = string
+  default     = "10.1.0.0/16"
+}
+
+variable "CIDR2" {
+  description = "CIDR for private network"
+  type        = string
+  default     = "10.2.0.0/16"
+}
+
+variable "CIDR3" {
+  description = "CIDR for public network"
+  type        = string
+  default     = "10.3.0.0/16"
+}
+
+variable "CIDR4" {
+  description = "CIDR for public network"
+  type        = string
+  default     = "10.4.0.0/16"
+}

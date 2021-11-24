@@ -71,12 +71,92 @@ resource "aws_route_table" "our-route-table" {
 
 resource "aws_subnet" "our-subnet" {
   vpc_id     = aws_vpc.our-network.id
-  cidr_block = "10.0.0.0/16"
+  cidr_block = var.CIDR1
 
   tags = {
     # To change
     service = "subnet"
     Name    = "learn-subnet"
+
+    # Defined in terraform.tfvars
+    owner       = var.author
+    platform    = var.platform
+    environment = var.environment
+  }
+}
+
+resource "aws_subnet" "our-subnet2" {
+  vpc_id     = aws_vpc.our-network.id
+  cidr_block = var.CIDR2
+
+  tags = {
+    # To change
+    service = "subnet"
+    Name    = "learn-subnet2"
+
+    # Defined in terraform.tfvars
+    owner       = var.author
+    platform    = var.platform
+    environment = var.environment
+  }
+}
+
+resource "aws_subnet" "our-subnet3" {
+  vpc_id     = aws_vpc.our-network.id
+  cidr_block = var.CIDR3
+
+  tags = {
+    # To change
+    service = "subnet"
+    Name    = "learn-subnet3"
+
+    # Defined in terraform.tfvars
+    owner       = var.author
+    platform    = var.platform
+    environment = var.environment
+  }
+}
+
+resource "aws_subnet" "our-subnet4" {
+  vpc_id     = aws_vpc.our-network.id
+  cidr_block = var.CIDR4
+
+  tags = {
+    # To change
+    service = "subnet"
+    Name    = "learn-subnet4"
+
+    # Defined in terraform.tfvars
+    owner       = var.author
+    platform    = var.platform
+    environment = var.environment
+  }
+}
+
+resource "aws_subnet" "our-subnet3" {
+  vpc_id     = aws_vpc.our-network.id
+  cidr_block = "10.3.0.0/16"
+
+  tags = {
+    # To change
+    service = "subnet"
+    Name    = "learn-subnet2"
+
+    # Defined in terraform.tfvars
+    owner       = var.author
+    platform    = var.platform
+    environment = var.environment
+  }
+}
+
+resource "aws_subnet" "our-subnet4" {
+  vpc_id     = aws_vpc.our-network.id
+  cidr_block = "10.4.0.0/16"
+
+  tags = {
+    # To change
+    service = "subnet"
+    Name    = "learn-subnet2"
 
     # Defined in terraform.tfvars
     owner       = var.author
