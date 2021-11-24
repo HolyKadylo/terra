@@ -73,33 +73,33 @@ resource "aws_network_acl" "private" {
   vpc_id = aws_vpc.our-network.id
 
   ingress {
-    from_port        = 22
-    to_port          = 22
-    rule_no    = 1
-        action     = "allow"
+    from_port = 22
+    to_port   = 22
+    rule_no   = 1
+    action    = "allow"
 
-    protocol         = "tcp"
-    cidr_block      = var.CIDR_to_allow_inbound_SSH
+    protocol   = "tcp"
+    cidr_block = var.CIDR_to_allow_inbound_SSH
   }
 
   ingress {
-    from_port        = 0
-    to_port          = 0
-    rule_no    = 200
-        action     = "deny"
+    from_port = 0
+    to_port   = 0
+    rule_no   = 200
+    action    = "deny"
 
-    protocol         = "all"
-    cidr_block      = "0.0.0.0/0"
+    protocol   = "all"
+    cidr_block = "0.0.0.0/0"
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    rule_no    = 100
-        action     = "allow"
+    from_port = 0
+    to_port   = 0
+    rule_no   = 100
+    action    = "allow"
 
-    protocol         = "-1"
-    cidr_block      = "0.0.0.0/0"
+    protocol   = "-1"
+    cidr_block = "0.0.0.0/0"
   }
 
   subnet_ids = [aws_subnet.our-subnet.id, aws_subnet.our-subnet2.id]
@@ -120,43 +120,43 @@ resource "aws_network_acl" "public" {
   vpc_id = aws_vpc.our-network.id
 
   ingress {
-    from_port        = 22
-    rule_no    = 1
-        action     = "allow"
+    from_port = 22
+    rule_no   = 1
+    action    = "allow"
 
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_block      = var.CIDR_to_allow_inbound_SSH
+    to_port    = 22
+    protocol   = "tcp"
+    cidr_block = var.CIDR_to_allow_inbound_SSH
   }
 
   ingress {
-    from_port        = 80
-    to_port          = 80
-    rule_no    = 100
-        action     = "allow"
+    from_port = 80
+    to_port   = 80
+    rule_no   = 100
+    action    = "allow"
 
-    protocol         = "tcp"
-    cidr_block      = "0.0.0.0/0"
+    protocol   = "tcp"
+    cidr_block = "0.0.0.0/0"
   }
 
   ingress {
-    from_port        = 0
-    to_port          = 0
-    rule_no    = 300
-        action     = "deny"
+    from_port = 0
+    to_port   = 0
+    rule_no   = 300
+    action    = "deny"
 
-    protocol         = "all"
-    cidr_block      = "0.0.0.0/0"
+    protocol   = "all"
+    cidr_block = "0.0.0.0/0"
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    rule_no    = 100
-        action     = "allow"
+    from_port = 0
+    to_port   = 0
+    rule_no   = 100
+    action    = "allow"
 
-    protocol         = "-1"
-    cidr_block      = "0.0.0.0/0"
+    protocol   = "-1"
+    cidr_block = "0.0.0.0/0"
   }
 
   subnet_ids = [aws_subnet.our-subnet3.id, aws_subnet.our-subnet4.id]
