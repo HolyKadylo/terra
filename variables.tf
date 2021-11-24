@@ -23,12 +23,6 @@ variable "CIDR_to_allow_inbound_SSH" {
   default     = "127.0.0.1/32"
 }
 
-variable "S3_size" {
-  description = "Size of the bucket to manage, GB"
-  type        = number
-  default     = 1
-}
-
 variable "EC2_type" {
   description = "Type of the unit"
   type        = string
