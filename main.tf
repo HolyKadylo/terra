@@ -92,6 +92,7 @@ resource "aws_network_acl" "private" {
     cidr_block = "0.0.0.0/0"
   }
 
+
   ingress {
     from_port        = 0
     to_port          = 0
