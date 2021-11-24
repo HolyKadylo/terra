@@ -69,18 +69,14 @@ resource "aws_route_table" "our-route-table" {
   }
 }
 
-resource "aws_route_table" "our-route-table2" {
-  vpc_id = aws_vpc.our-network.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.our-getway.id
-  }
+resource "aws_nat_gateway" "our-private-nat-gateway" {
+  connectivity_type = "private"
+  subnet_id         = aws_subnet.our-subnet.id
 
   tags = {
     # To change
-    service = "route-table"
-    Name    = "learn-route-table"
+    service = "nat-gateway"
+    Name    = "learn-nat-gateway"
 
     # Defined in terraform.tfvars
     owner       = var.author
@@ -89,44 +85,23 @@ resource "aws_route_table" "our-route-table2" {
   }
 }
 
-resource "aws_route_table" "our-route-table3" {
-  vpc_id = aws_vpc.our-network.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.our-getway.id
-  }
+resource "aws_nat_gateway" "our-public-nat-gateway" {
+  subnet_id     = aws_subnet.our-subnet3.id
 
   tags = {
     # To change
-    service = "route-table"
-    Name    = "learn-route-table"
+    service = "nat-gateway"
+    Name    = "learn-nat-gateway"
 
     # Defined in terraform.tfvars
     owner       = var.author
     platform    = var.platform
     environment = var.environment
   }
-}
 
-resource "aws_route_table" "our-route-table4" {
-  vpc_id = aws_vpc.our-network.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.our-getway.id
-  }
-
-  tags = {
-    # To change
-    service = "route-table"
-    Name    = "learn-route-table"
-
-    # Defined in terraform.tfvars
-    owner       = var.author
-    platform    = var.platform
-    environment = var.environment
-  }
+  # To ensure proper ordering, it is recommended to add an explicit dependency
+  # on the Internet Gateway for the VPC.
+  depends_on = [aws_internet_gateway.our-getway]
 }
 
 resource "aws_subnet" "our-subnet" {
