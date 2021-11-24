@@ -69,6 +69,66 @@ resource "aws_route_table" "our-route-table" {
   }
 }
 
+resource "aws_route_table" "our-route-table2" {
+  vpc_id = aws_vpc.our-network.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.our-getway.id
+  }
+
+  tags = {
+    # To change
+    service = "route-table"
+    Name    = "learn-route-table"
+
+    # Defined in terraform.tfvars
+    owner       = var.author
+    platform    = var.platform
+    environment = var.environment
+  }
+}
+
+resource "aws_route_table" "our-route-table3" {
+  vpc_id = aws_vpc.our-network.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.our-getway.id
+  }
+
+  tags = {
+    # To change
+    service = "route-table"
+    Name    = "learn-route-table"
+
+    # Defined in terraform.tfvars
+    owner       = var.author
+    platform    = var.platform
+    environment = var.environment
+  }
+}
+
+resource "aws_route_table" "our-route-table4" {
+  vpc_id = aws_vpc.our-network.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.our-getway.id
+  }
+
+  tags = {
+    # To change
+    service = "route-table"
+    Name    = "learn-route-table"
+
+    # Defined in terraform.tfvars
+    owner       = var.author
+    platform    = var.platform
+    environment = var.environment
+  }
+}
+
 resource "aws_subnet" "our-subnet" {
   vpc_id     = aws_vpc.our-network.id
   cidr_block = var.CIDR1
