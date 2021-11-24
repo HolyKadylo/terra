@@ -133,38 +133,6 @@ resource "aws_subnet" "our-subnet4" {
   }
 }
 
-resource "aws_subnet" "our-subnet3" {
-  vpc_id     = aws_vpc.our-network.id
-  cidr_block = "10.3.0.0/16"
-
-  tags = {
-    # To change
-    service = "subnet"
-    Name    = "learn-subnet2"
-
-    # Defined in terraform.tfvars
-    owner       = var.author
-    platform    = var.platform
-    environment = var.environment
-  }
-}
-
-resource "aws_subnet" "our-subnet4" {
-  vpc_id     = aws_vpc.our-network.id
-  cidr_block = "10.4.0.0/16"
-
-  tags = {
-    # To change
-    service = "subnet"
-    Name    = "learn-subnet2"
-
-    # Defined in terraform.tfvars
-    owner       = var.author
-    platform    = var.platform
-    environment = var.environment
-  }
-}
-
 # Using our server
 resource "aws_instance" "our-core" {
   ami                         = var.EC2_AMI
