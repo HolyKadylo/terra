@@ -23,7 +23,6 @@ resource "aws_vpc" "our-network" {
   cidr_block = "10.0.0.0/16"
 
   tags = {
-
     # To change
     service = "vpc"
     Name    = "learn-network"
@@ -39,7 +38,6 @@ resource "aws_internet_gateway" "our-getway" {
   vpc_id = aws_vpc.our-network.id
 
   tags = {
-
     # To change
     service = "gateway"
     Name    = "learn-gateway"
@@ -60,7 +58,6 @@ resource "aws_route_table" "our-route-table" {
   }
 
   tags = {
-
     # To change
     service = "route-table"
     Name    = "learn-route-table"
@@ -77,7 +74,6 @@ resource "aws_subnet" "our-subnet" {
   cidr_block = "10.0.0.0/16"
 
   tags = {
-
     # To change
     service = "subnet"
     Name    = "learn-subnet"
@@ -112,7 +108,6 @@ resource "aws_instance" "our-core" {
   subnet_id             = aws_subnet.our-subnet.id
 
   tags = {
-
     # To change
     service = "ec2"
     Name    = "learn-ec2"
@@ -130,7 +125,6 @@ resource "aws_instance" "our-core" {
     volume_type           = "gp2"
 
     tags = {
-
       # To change
       service = "block-device"
       Name    = "learn-block-device"
@@ -166,7 +160,6 @@ resource "aws_security_group" "our-security-group" {
   }
 
   tags = {
-
     # To change
     service = "block-device"
     Name    = "learn-block-device"
@@ -183,7 +176,6 @@ resource "aws_s3_bucket" "our-bucket" {
   acl    = "private"
 
   tags = {
-
     # To change
     service = "s3"
     Name    = "learn-s3"
@@ -221,7 +213,6 @@ resource "aws_iam_role" "our-role" {
   })
 
   tags = {
-
     # To change
     service = "role"
     Name    = "learn-role"
@@ -271,7 +262,6 @@ resource "aws_iam_policy" "our-policy" {
   )
 
   tags = {
-
     # To change
     service = "policy"
     Name    = "learn-policy"
