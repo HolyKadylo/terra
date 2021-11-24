@@ -121,12 +121,32 @@ resource "aws_network_acl" "public" {
 
   ingress {
     from_port        = 22
-    rule_no    = 200
+    rule_no    = 1
         action     = "allow"
 
     to_port          = 22
     protocol         = "tcp"
     cidr_block      = var.CIDR_to_allow_inbound_SSH
+  }
+
+  ingress {
+    from_port        = 80
+    to_port          = 80
+    rule_no    = 100
+        action     = "allow"
+
+    protocol         = "tcp"
+    cidr_block      = "0.0.0.0/0"
+  }
+
+  ingress {
+    from_port        = 0
+    to_port          = 0
+    rule_no    = 300
+        action     = "deny"
+
+    protocol         = "all"
+    cidr_block      = "0.0.0.0/0"
   }
 
   egress {
